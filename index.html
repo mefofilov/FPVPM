@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FastPVPmoney</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <script defer src="script.js"></script>
+</head>
+<body class="page">
+  <header class="header">
+    <div class="header__container">
+      <div class="header__logo-section">
+        <span class="header__logo">🎮 FastPVPmoney</span>
+      </div>
+      <nav class="header__nav">
+        <a href="#" class="header__link header__link--active">Duels</a>
+        <a href="#" class="header__link">Profile</a>
+      </nav>
+      <div class="header__right">
+        <div id="auth-section">
+          <button id="steam-login" class="steam-login-btn">
+            <img src="https://community.cloudflare.steamstatic.com/public/images/signinthroughsteam/sits_01.png" alt="Sign in through Steam">
+          </button>
+        </div>
+        <div id="user-section" style="display:none;" class="user-section">
+          <div class="header__balance" id="user-balance">
+            <svg class="wallet-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+            $1000
+          </div>
+          <button class="header__plus" id="deposit-btn" title="Deposit">+</button>
+          <button class="header__minus" id="withdraw-btn" title="Withdraw">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+          <button class="header__settings">⚙️</button>
+          <button class="header__logout" id="logout-btn" title="Log out">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <main class="main">
+    <div class="container">
+      <div id="auth-message" class="auth-message">
+        <div class="auth-message__content">
+          <h2>Sign in to create or join duels</h2>
+          <p>You need to log in through Steam to access all features</p>
+          <button id="steam-login-main" class="steam-login-btn steam-login-btn--large">
+            <img src="https://community.cloudflare.steamstatic.com/public/images/signinthroughsteam/sits_01.png" alt="Sign in through Steam">
+          </button>
+        </div>
+      </div>
+      
+      <div id="main-content" style="display:none;">
+        <div class="ad-banner" id="ad-banner">
+          <div class="ad-banner__slide ad-banner__slide--active">
+            <img src="https://cdn.cybershoke.net/img/ads/duel-promo.png" alt="Cybershoke Duel" class="ad-banner__img">
+            <div class="ad-banner__text">Играйте дуэли на Cybershoke! <a href="https://cybershoke.net/servers/duel" target="_blank" class="ad-banner__link">Список серверов</a></div>
+          </div>
+          <div class="ad-banner__slide">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Бонус" class="ad-banner__img">
+            <div class="ad-banner__text">Бонус $5 за регистрацию через Steam! <a href="#" class="ad-banner__link">Подробнее</a></div>
+          </div>
+          <div class="ad-banner__slide">
+            <img src="https://cdn.cybershoke.net/img/ads/tournament.png" alt="Турнир" class="ad-banner__img">
+            <div class="ad-banner__text">Участвуй в турнире FastPVPmoney! <a href="#" class="ad-banner__link">Регистрация</a></div>
+          </div>
+          <button class="ad-banner__arrow ad-banner__arrow--left" id="ad-banner-prev">&#8592;</button>
+          <button class="ad-banner__arrow ad-banner__arrow--right" id="ad-banner-next">&#8594;</button>
+          <div class="ad-banner__dots">
+            <span class="ad-banner__dot ad-banner__dot--active"></span>
+            <span class="ad-banner__dot"></span>
+            <span class="ad-banner__dot"></span>
+          </div>
+        </div>
+        <div class="controls">
+          <div class="controls-row">
+            <div class="controls__search-wrapper">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input class="controls__search" placeholder="Search rooms..." />
+            </div>
+          </div>
+          <div class="controls-row">
+            <button class="controls__button controls__button--primary">+ Create Room</button>
+            <button class="controls__button controls__button--filter">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+              Filters
+            </button>
+          </div>
+        </div>
+        
+        <div class="rooms__header">
+          <h2 class="rooms__title">Available Rooms</h2>
+        </div>
+        
+        <div class="rooms__list"></div>
+      </div>
+    </div>
+  </main>
+  
+  <div class="modal-bg" id="create-room-modal" style="display:none;">
+    <div class="modal">
+      <button class="modal__close">&times;</button>
+      <h2 class="modal__title">Create New Room</h2>
+      <div class="modal__form">
+        <label class="modal__label">
+          Game
+          <select class="modal__select">
+            <option value="CS2">CS2</option>
+          </select>
+        </label>
+        <label class="modal__label">
+          Bet Amount
+          <input type="number" min="1" class="modal__input" placeholder="Enter bet amount" />
+        </label>
+        <div class="modal__actions">
+          <button class="modal__cancel">Cancel</button>
+          <button class="modal__create">Create Room</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-bg" id="deposit-modal" style="display:none;">
+    <div class="modal">
+      <button class="modal__close">&times;</button>
+      <h2 class="modal__title">Deposit Funds</h2>
+      <div class="modal__form">
+        <label class="modal__label">
+          Amount (RUB)
+          <input type="number" min="100" class="modal__input" id="deposit-amount" placeholder="Enter amount (min. 100 RUB)" />
+        </label>
+        <div class="payment-methods">
+          <h3 class="payment-methods__title">Payment Method</h3>
+          <div class="payment-methods__options">
+            <label class="payment-method">
+              <input type="radio" name="payment" value="card" checked>
+              <span class="payment-method__label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                Card
+              </span>
+            </label>
+            <label class="payment-method">
+              <input type="radio" name="payment" value="qiwi">
+              <span class="payment-method__label">QIWI</span>
+            </label>
+            <label class="payment-method">
+              <input type="radio" name="payment" value="sbp">
+              <span class="payment-method__label">SBP</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal__info">
+          <p>Commission: 2% + payment system fee</p>
+        </div>
+        <div class="modal__actions">
+          <button class="modal__cancel">Cancel</button>
+          <button class="modal__create" id="deposit-confirm">Deposit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-bg" id="withdraw-modal" style="display:none;">
+    <div class="modal">
+      <button class="modal__close">&times;</button>
+      <h2 class="modal__title">Withdraw Funds</h2>
+      <div class="modal__form">
+        <label class="modal__label">
+          Amount (RUB)
+          <input type="number" min="100" class="modal__input" id="withdraw-amount" placeholder="Enter amount (min. 100 RUB)" />
+        </label>
+        <label class="modal__label">
+          Withdrawal Method
+          <select class="modal__select" id="withdraw-method">
+            <option value="card">Card</option>
+            <option value="qiwi">QIWI Wallet</option>
+            <option value="sbp">SBP</option>
+          </select>
+        </label>
+        <label class="modal__label">
+          Payment Details
+          <input type="text" class="modal__input" id="withdraw-details" placeholder="Card number / QIWI number / Phone" />
+        </label>
+        <div class="modal__info">
+          <p>Commission: 2% + payment system fee</p>
+        </div>
+        <div class="modal__actions">
+          <button class="modal__cancel">Cancel</button>
+          <button class="modal__create" id="withdraw-confirm">Withdraw</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-bg" id="profile-modal" style="display:none;">
+    <div class="modal modal--large">
+      <button class="modal__close">&times;</button>
+      <h2 class="modal__title">Player Profile</h2>
+      
+      <div class="profile">
+        <div class="profile__header">
+          <div class="profile__avatar">
+            <img id="profile-avatar" src="https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" alt="Player Avatar">
+          </div>
+          <div class="profile__info">
+            <h3 id="profile-username">Username</h3>
+            <div class="profile__balance">
+              <span>Balance: </span>
+              <span id="profile-balance">
+                <svg class="wallet-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                  <line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                $1000
+              </span>
+            </div>
+            <div class="balance-actions">
+              <button class="deposit" id="profile-deposit-btn">Deposit</button>
+              <button class="withdraw" id="profile-withdraw-btn">Withdraw</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="profile__stats">
+          <h3 class="stats-title">Statistics</h3>
+          
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-card__value" id="stats-total-games">0</div>
+              <div class="stat-card__label">Total Games</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__value" id="stats-wins">0</div>
+              <div class="stat-card__label">Wins</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__value" id="stats-winrate">0%</div>
+              <div class="stat-card__label">Win Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__value" id="stats-kd">0.0</div>
+              <div class="stat-card__label">K/D Ratio</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__value" id="stats-hs">0%</div>
+              <div class="stat-card__label">Headshot %</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__value" id="stats-earnings">$0</div>
+              <div class="stat-card__label">Total Earnings</div>
+            </div>
+          </div>
+          
+          <div class="stats-details">
+            <div class="stats-row">
+              <div class="stats-label">Total Kills:</div>
+              <div class="stats-value" id="stats-kills">0</div>
+            </div>
+            <div class="stats-row">
+              <div class="stats-label">Total Deaths:</div>
+              <div class="stats-value" id="stats-deaths">0</div>
+            </div>
+            <div class="stats-row">
+              <div class="stats-label">Headshots:</div>
+              <div class="stats-value" id="stats-headshots">0</div>
+            </div>
+            <div class="stats-row">
+              <div class="stats-label">Accuracy:</div>
+              <div class="stats-value" id="stats-accuracy">0%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="profile__history">
+          <h3 class="history-title">Recent Matches</h3>
+          <div class="history-list" id="match-history">
+            <div class="history-empty">No matches played yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-bg" id="filter-modal" style="display:none;">
+    <div class="modal">
+      <button class="modal__close">&times;</button>
+      <h2 class="modal__title">Filter Rooms</h2>
+      <div class="modal__form">
+        <label class="modal__label">
+          Game
+          <select class="modal__select" id="filter-game">
+            <option value="">All Games</option>
+            <option value="CS2">CS2</option>
+          </select>
+        </label>
+        <div class="filter-range">
+          <label class="modal__label">
+            Bet Range
+            <div class="range-inputs">
+              <div class="range-input">
+                <span>From $</span>
+                <input type="number" min="0" class="modal__input modal__input--small" id="filter-min-bet" placeholder="Min" />
+              </div>
+              <div class="range-input">
+                <span>To $</span>
+                <input type="number" min="0" class="modal__input modal__input--small" id="filter-max-bet" placeholder="Max" />
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="modal__actions">
+          <button class="modal__cancel" id="filter-reset">Reset</button>
+          <button class="modal__create" id="filter-apply">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
